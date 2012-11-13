@@ -1,0 +1,8 @@
+{
+	"name": "Simple Proxy",
+	version: "0.0.1",
+	description: "A Simple NodeJS proxy server",
+	"dependencies": {
+
+	}
+}
