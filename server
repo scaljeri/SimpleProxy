@@ -1,0 +1,79 @@
+#!/usr/bin/env node
+
+var http = require('http')
+	, url = require('url')
+	, qs = require('querystring')
+	, connect = require('connect')
+        , cache = require('./lib/storage')
+        , proxy = require('./lib/proxy')
+	, argv = require('optimist').argv ;
+
+var app = connect() 
+	.use(function(req, res, next) {
+		console.log(req.url) ;
+        	if(req.method=='POST') {
+                	var body = '' ;
+                	req.on('data', function (chunk) {
+                        	body += chunk ;
+                	});
+                	req.on('end',function(){
+                        	req.body = qs.parse(body);
+                        	next() ;
+                	});
+        	}
+		else
+			next() ;
+	})
+	//.use(connect.bodyParser())	// doesn't work
+	.use(connect.query())
+	.use(serveFromDB) 
+	.use(actAsProxyServer) 
+	.use(cacheContent) ;
+
+http.createServer(app).listen(8000) ;
+
+/**************************************************/
+
+// search MongoDB for cached responses
+function serveFromDB(req, res, next) {
+	if ( !argv.proxy )  {
+		cache.load(req, function(cachedObj) {
+			if ( cachedObj ) {
+				console.log("served from cache "+req.url) ;
+				res.writeHead(cachedObj.statusCode, cachedObj.headers) ;
+        			res.end(cache.binaryData ? cachedObj.binaryData : cachedObj.utf8Data) ;
+			}
+			else
+				next() ;
+		}) ;
+	}
+	else
+		next() ;
+}
+
+function actAsProxyServer(req, res, next) {
+	proxy.send(req, function(response, data) {
+		req.proxy = { data: data, headers: response.headers, statusCode: response.statusCode } ;
+		next() ;
+	}) ;
+}
+
+function cacheContent(req, res, next) {
+	cache.save( req ) ;	
+
+	console.log("DONE: " + req.proxy.statusCode) ;
+	res.writeHead(req.proxy.statusCode, req.proxy.headers) ;
+        res.end(req.proxy.data) ;
+}
+
+/*
+http.createServer(function (req, res) {
+	fs.readFile('testimg.png', 'binary', function(err, data) {
+		res.writeHead(200, { 'content-type': 'image/png' });
+		res.end(data, 'binary');
+	}) ;
+  	//res.writeHead(200, { 'Content-Type': 'text/plain' });
+  	//res.write('request successfully proxied to: ' + req.url + '\n' + JSON.stringify(req.headers, true, 2));
+  	//res.end();
+}).listen(8080);
+*/
