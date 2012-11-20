@@ -10,7 +10,6 @@ var http = require('http')
 
 var app = connect() 
 	.use(function(req, res, next) {
-		console.log(req.url) ;
         	if(req.method=='POST') {
                 	var body = '' ;
                 	req.on('data', function (chunk) {
@@ -39,7 +38,7 @@ function serveFromDB(req, res, next) {
 	if ( !argv.proxy )  {
 		cache.load(req, function(cachedObj) {
 			if ( cachedObj ) {
-				console.log("served from cache "+req.url) ;
+				console.log("C - "+req.url) ;
 				res.writeHead(cachedObj.statusCode, cachedObj.headers) ;
         			res.end(cache.binaryData ? cachedObj.binaryData : cachedObj.utf8Data) ;
 			}
@@ -53,6 +52,7 @@ function serveFromDB(req, res, next) {
 
 function actAsProxyServer(req, res, next) {
 	proxy.send(req, function(response, data) {
+		console.log("P - " + req.url) ;
 		req.proxy = { data: data, headers: response.headers, statusCode: response.statusCode } ;
 		next() ;
 	}) ;
@@ -61,7 +61,6 @@ function actAsProxyServer(req, res, next) {
 function cacheContent(req, res, next) {
 	cache.save( req ) ;	
 
-	console.log("DONE: " + req.proxy.statusCode) ;
 	res.writeHead(req.proxy.statusCode, req.proxy.headers) ;
         res.end(req.proxy.data) ;
 }
