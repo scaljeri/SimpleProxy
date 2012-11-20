@@ -4,6 +4,7 @@ SimpleProxy
 A NodeJS proxy server
 
 Install:
+
 	$> cd SimpleProxy
 	$> npm install
 
