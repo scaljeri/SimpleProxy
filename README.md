@@ -3,6 +3,10 @@ SimpleProxy
 
 A NodeJS proxy server
 
+Install:
+	$> cd SimpleProxy
+	$> npm install
+
 Usage:
 
 	$> ./server --port 8080 --host localhost --ignore-params=_dc --proxy=true
