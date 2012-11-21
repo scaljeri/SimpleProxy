@@ -32,10 +32,19 @@ if ( argv["map-ignore-extensions"] )  {
 	mapIgnoreExtensions_re = new RegExp( argv["map-ignore-extensions"].replace(/,|\s/g, "|") ) ;
 }
 
+connect.logger.token("served-by", function(req,res) {
+	return  req["served-by"] ;
+}) ;
+connect.logger.token("statusCode", function(req,res) {
+	return  res["statusCode"] ;
+}) ;
+
+var app = connect()
+	.use(connect.logger(':method :url, :response-time ms - :served-by (statusCode: :statusCode)')) ;
+
 // serve request from filesystem ?
 if ( argv["map-url"] ) {
-	var app = connect()
-		.use(function(req, res, next) {
+	app.use(function(req, res, next) {
 			if ( argv["map-ignore-extensions"] ) {
 				var urlSplit = req.url.split("?") ;
 	
@@ -47,7 +56,7 @@ if ( argv["map-url"] ) {
 				var path = argv["to-fs"] + urlSplit[0].replace(argv["map-url"], "") ;
 				fs.exists(path, function(exists) {
 					if ( exists )
-						console.log("FS - " + req.url) ;
+						req["served-by"] = "served from the filesystem" ;
 					next() ;
 				}) ;
 			} 
@@ -92,7 +101,7 @@ function serveFromDB(req, res, next) {
 	if ( !argv.proxy )  {
 		cache.load(req, function(cachedObj) {
 			if ( cachedObj ) {
-				console.log("C - "+req.url) ;
+				req["served-by"] = "served from cache/db" ;
 				res.writeHead(cachedObj.statusCode, cachedObj.headers) ;
         			res.end(cache.binaryData ? cachedObj.binaryData : cachedObj.utf8Data) ;
 			}
@@ -106,7 +115,7 @@ function serveFromDB(req, res, next) {
 
 function actAsProxyServer(req, res, next) {
 	proxy.send(req, function(response, data) {
-		console.log("P - " + req.url) ;
+		req["served-by"] = "request proxied" ;
 		req.proxy = { data: data, headers: response.headers, statusCode: response.statusCode } ;
 		next() ;
 	}) ;
