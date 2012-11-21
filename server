@@ -2,14 +2,68 @@
 
 var http = require('http')
 	, url = require('url')
+	, fs  = require('fs')
 	, qs = require('querystring')
 	, connect = require('connect')
         , cache = require('./lib/storage')
         , proxy = require('./lib/proxy')
 	, argv = require('optimist').argv ;
 
-var app = connect() 
-	.use(function(req, res, next) {
+if ( argv["help"] ) {
+	var help = "USAGE: node server [options]\n" ;
+	help += "   --host			- remote hostname (localhost)\n" ;
+	help += "   --port			- remote port (80)\n" ;
+	help += "   --proxy			- true: proxy all request and cache (insert/update) the responses (false)\n" ;
+	help += "			  	  false: if possible serve the response from cache\n" ;
+	help += "   --ignore-params		- a list of GET/POST parameter to be ignored for the cache response lookup\n" ;
+	help += "   --map-url, --map-to-fs	- map urls to the filesystem\n" ;
+	help += "   --map-ignore-extensions 	- a list of file extensions which should not be served from the file system (e.g. jsp and php)\n" ;
+	console.log(help) ;
+	process.exit(1) ;
+}
+
+if ( argv["map-url"] && !argv["to-fs"] || !argv["map-url"] && argv["to-fs"] ) {
+	console.log("ERROR: if option --map-url is defined, --to-fs should be defined too!!\n") ;
+	process.exit(1) ;
+}
+
+var mapIgnoreExtensions_re = null ;
+if ( argv["map-ignore-extensions"] )  {
+	mapIgnoreExtensions_re = new RegExp( argv["map-ignore-extensions"].replace(/,|\s/g, "|") ) ;
+}
+
+// serve request from filesystem ?
+if ( argv["map-url"] ) {
+	var app = connect()
+		.use(function(req, res, next) {
+			if ( argv["map-ignore-extensions"] ) {
+				var urlSplit = req.url.split("?") ;
+	
+				if ( urlSplit[0].match(mapIgnoreExtensions_re) )
+					urlSplit[0] += "-" ;
+				req.url = urlSplit.join("?") ;
+
+				// determine if file exist (for logging only)
+				var path = argv["to-fs"] + urlSplit[0].replace(argv["map-url"], "") ;
+				fs.exists(path, function(exists) {
+					if ( exists )
+						console.log("FS - " + req.url) ;
+					next() ;
+				}) ;
+			} 
+			else
+				next() ;
+		}) 
+		.use(argv["map-url"], connect.static(argv["to-fs"]) )
+		.use(function(req, res, next) {
+			var urlSplit = req.url.split("?") ;
+			if ( urlSplit[0].match(/-$/) )
+				urlSplit[0] = urlSplit[0].slice(0, -1) ;
+			req.url = urlSplit.join("?") ;
+			next() ;
+		}) ;
+}
+app.use(function(req, res, next) {
         	if(req.method=='POST') {
                 	var body = '' ;
                 	req.on('data', function (chunk) {
@@ -22,12 +76,12 @@ var app = connect()
         	}
 		else
 			next() ;
-	})
-	//.use(connect.bodyParser())	// doesn't work
-	.use(connect.query())
-	.use(serveFromDB) 
-	.use(actAsProxyServer) 
-	.use(cacheContent) ;
+    })
+    //.use(connect.bodyParser())	// doesn't work
+    .use(connect.query())
+    .use(serveFromDB) 
+    .use(actAsProxyServer) 
+    .use(cacheContent) ;
 
 http.createServer(app).listen(8000) ;
 
