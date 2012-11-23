@@ -40,57 +40,52 @@ connect.logger.token("statusCode", function(req,res) {
 }) ;
 
 var app = connect()
-	.use(connect.logger(':method :url, :response-time ms - :served-by (statusCode: :statusCode)')) ;
+	.use(connect.logger(':date - :method :url, :response-time ms - :served-by (statusCode: :statusCode)'))  ;
 
 // serve request from filesystem ?
 if ( argv["map-url"] ) {
 	app.use(function(req, res, next) {
-			if ( argv["map-ignore-extensions"] ) {
-				var urlSplit = req.url.split("?") ;
-	
-				if ( urlSplit[0].match(mapIgnoreExtensions_re) )
-					urlSplit[0] += "-" ;
-				req.url = urlSplit.join("?") ;
-
-				// determine if file exist (for logging only)
-				var path = argv["to-fs"] + urlSplit[0].replace(argv["map-url"], "") ;
-				fs.exists(path, function(exists) {
-					if ( exists )
-						req["served-by"] = "served from the filesystem" ;
-					next() ;
-				}) ;
-			} 
-			else
-				next() ;
-		}) 
-		.use(argv["map-url"], connect.static(argv["to-fs"]) )
-		.use(function(req, res, next) {
+		if ( argv["map-ignore-extensions"] ) {
 			var urlSplit = req.url.split("?") ;
-			if ( urlSplit[0].match(/-$/) )
-				urlSplit[0] = urlSplit[0].slice(0, -1) ;
+
+			if ( urlSplit[0].match(mapIgnoreExtensions_re) )
+				urlSplit[0] += "-" ;
 			req.url = urlSplit.join("?") ;
-			next() ;
-		}) ;
-}
-app.use(function(req, res, next) {
-        	if(req.method=='POST') {
-                	var body = '' ;
-                	req.on('data', function (chunk) {
-                        	body += chunk ;
-                	});
-                	req.on('end',function(){
-                        	req.body = qs.parse(body);
-                        	next() ;
-                	});
-        	}
+
+			// determine if file exist (for logging only)
+			var path = argv["to-fs"] + urlSplit[0].replace(argv["map-url"], "") ;
+			fs.exists(path, function(exists) {
+				if ( exists )
+					req["served-by"] = "served from the filesystem" ;
+				next() ;
+			}) ;
+		} 
 		else
 			next() ;
-    })
-    //.use(connect.bodyParser())	// doesn't work
-    .use(connect.query())
-    .use(serveFromDB) 
-    .use(actAsProxyServer) 
-    .use(cacheContent) ;
+	}) 
+	.use(argv["map-url"], connect.static(argv["to-fs"]) )
+	.use(function(req, res, next) {
+		var urlSplit = req.url.split("?") ;
+		if ( urlSplit[0].match(/-$/) )
+			urlSplit[0] = urlSplit[0].slice(0, -1) ;
+		req.url = urlSplit.join("?") ;
+		next() ;
+	}) ;
+}
+app.use( connect.bodyParser() )
+   .use(connect.query())
+   .use(serveFromDB) 
+   .use(actAsProxyServer) 
+   .use(cacheContent)
+   .use(function(err, req, res, next) {
+	console.log("ERROR: " + JSON.stringify(err)) ;
+	console.log("URL: " + req.url + " ( " + req.method + " )") ;
+	console.log("REQUEST HEADERS:") ;
+	console.dir(req.headers) ;
+
+	res.writeHead(500);
+        res.end('Error occurred, sorry.');
+   }) ;
 
 http.createServer(app).listen(8000) ;
 
@@ -103,7 +98,7 @@ function serveFromDB(req, res, next) {
 			if ( cachedObj ) {
 				req["served-by"] = "served from cache/db" ;
 				res.writeHead(cachedObj.statusCode, cachedObj.headers) ;
-        			res.end(cache.binaryData ? cachedObj.binaryData : cachedObj.utf8Data) ;
+        			res.end(cachedObj.binaryData ? cachedObj.binaryData : cachedObj.utf8Data) ;
 			}
 			else
 				next() ;
@@ -114,8 +109,8 @@ function serveFromDB(req, res, next) {
 }
 
 function actAsProxyServer(req, res, next) {
+	req["served-by"] = "request proxied" ;
 	proxy.send(req, function(response, data) {
-		req["served-by"] = "request proxied" ;
 		req.proxy = { data: data, headers: response.headers, statusCode: response.statusCode } ;
 		next() ;
 	}) ;
