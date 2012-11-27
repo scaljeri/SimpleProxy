@@ -1,0 +1,24 @@
+/* line 1, ../sass/main.scss */
+.spinner {
+  background-image: url(../images/ajax-loader.gif);
+  background-size: 40px 40px;
+}
+
+/* line 8, ../sass/main.scss */
+#configs {
+  margin-left: 50px;
+  width: 250px;
+  height: 40px;
+  line-height: 40px;
+}
+/* line 14, ../sass/main.scss */
+#configs #config-msg {
+  float: left;
+  width: 200px;
+}
+/* line 18, ../sass/main.scss */
+#configs .spinner {
+  width: 40px;
+  height: 40px;
+  float: right;
+}
