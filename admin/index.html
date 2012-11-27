@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset='utf-8'> 
+		<script src="js/jquery.js"></script>
+
+		<script>
+			var configJson ;
+			$.getJSON('/config/config.json', function(data) {
+				console.log("CONFIG LOADED") ;
+				configJson = data ;
+				if ( !configJson )
+					configJson = {} ;
+			}) ;
+
+			$(function() {
+				console.log("START NOW") ;
+			}) ;
+
+		</script>
+
+		<style>
+			#main {
+				border: 1px solid black ;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="main">
+			config
+		</div>
+	</body>
+</html>

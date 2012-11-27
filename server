@@ -7,7 +7,8 @@ var http = require('http')
 	, connect = require('connect')
         , cache = require('./lib/storage')
         , proxy = require('./lib/proxy')
-	, argv = require('optimist').argv ;
+	, argv = require('optimist').argv
+	, admin = require('./lib/admin') ;
 
 if ( argv["help"] ) {
 	var help = "USAGE: node server [options]\n" ;
@@ -22,7 +23,7 @@ if ( argv["help"] ) {
 	process.exit(1) ;
 }
 
-if ( argv["map-url"] && !argv["to-fs"] || !argv["map-url"] && argv["to-fs"] ) {
+if ( argv["map-url"] && !argv["map-to-fs"] || !argv["map-url"] && argv["map-to-fs"] ) {
 	console.log("ERROR: if option --map-url is defined, --to-fs should be defined too!!\n") ;
 	process.exit(1) ;
 }
@@ -40,7 +41,8 @@ connect.logger.token("statusCode", function(req,res) {
 }) ;
 
 var app = connect()
-	.use(connect.logger(':date - :method :url, :response-time ms - :served-by (statusCode: :statusCode)'))  ;
+	.use(connect.logger(':date - :method :url, :response-time ms - :served-by (statusCode: :statusCode)'))  
+	.use( connect.bodyParser() ) ; // parse body before anything else
 
 // serve request from filesystem ?
 if ( argv["map-url"] ) {
@@ -53,7 +55,7 @@ if ( argv["map-url"] ) {
 			req.url = urlSplit.join("?") ;
 
 			// determine if file exist (for logging only)
-			var path = argv["to-fs"] + urlSplit[0].replace(argv["map-url"], "") ;
+			var path = argv["map-to-fs"] + urlSplit[0].replace(argv["map-url"], "") ;
 			fs.exists(path, function(exists) {
 				if ( exists )
 					req["served-by"] = "served from the filesystem" ;
@@ -63,7 +65,7 @@ if ( argv["map-url"] ) {
 		else
 			next() ;
 	}) 
-	.use(argv["map-url"], connect.static(argv["to-fs"]) )
+	.use(argv["map-url"], connect.static(argv["map-to-fs"]) )
 	.use(function(req, res, next) {
 		var urlSplit = req.url.split("?") ;
 		if ( urlSplit[0].match(/-$/) )
@@ -72,8 +74,7 @@ if ( argv["map-url"] ) {
 		next() ;
 	}) ;
 }
-app.use( connect.bodyParser() )
-   .use(connect.query())
+app.use(connect.query())
    .use(serveFromDB) 
    .use(actAsProxyServer) 
    .use(cacheContent)
@@ -82,6 +83,8 @@ app.use( connect.bodyParser() )
 	console.log("URL: " + req.url + " ( " + req.method + " )") ;
 	console.log("REQUEST HEADERS:") ;
 	console.dir(req.headers) ;
+	console.log("body:") ;
+	console.dir(req.body) ;
 
 	res.writeHead(500);
         res.end('Error occurred, sorry.');
