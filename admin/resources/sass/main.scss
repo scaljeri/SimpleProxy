@@ -1,3 +1,15 @@
+@import "sprite" ;
+
+#main {
+        border: 1px solid black ;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -khtml-border-radius: 20px;
+        border-radius: 20px;
+        margin: 10px ;
+	padding: 10px ;
+}
+
 .spinner {
 	background: {
 		image: url(../images/ajax-loader.gif) ;
@@ -5,14 +17,21 @@
 	}
 }
 
-#configs {
+#config-container {
 	margin-left: 50px ;
-	width: 250px ;
+	width: 100% ;
 	height: 40px ;
 	line-height: 40px ;
 
-	#config-msg {
+	#config-loading {
 		float: left ;
+		width: 240px ;
+	}
+	.config-msg {
+		display: inline-block ;
+		width: 200px ;
+	}
+	select {
 		width: 200px ;
 	}
 	.spinner {
@@ -20,4 +39,64 @@
 		height: 40px ;
 		float: right ;
 	}
+}
+
+a.tooltip {
+	position: relative;
+
+	&::before {
+    		content: attr(data-tip) ;
+    		font-size: 13px;
+    		position:absolute;
+    		z-index: 999;
+    		white-space:nowrap;
+    		bottom:9999px;
+    		left: 50%;
+    		background:#000;
+    		color:#e0e0e0;
+    		padding:0px 7px;
+    		line-height: 24px;
+    		height: 24px;
+    		opacity: 0;
+    		transition:opacity 0.4s ease-out;
+    	}
+	&:hover::before {
+    		opacity: 1;
+    		bottom:-35px;
+        }
+}
+
+label { 
+	margin-right:10px ;
+	display: inline-block ;
+	width: 120px ;
+}
+
+fieldset {
+	border-radius: 10px ;
+	padding: 10px ;
+	margin-left: 10px ;
+	width: 500px ;
+	fieldset {
+		margin-top: 10px ;
+		margin-bottom: 10px ;
+		width: 400px ;
+	}
+	input {
+		width: 200px ;
+	}
+}
+
+#add-url-map {
+	width: 100% ;
+	height: 20px ;
+	a {
+		display: inline-block ;
+		float: right;
+		margin-right: 10px ;
+	}
+}
+
+.hidden {
+	display: none ;
 }

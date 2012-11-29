@@ -6,40 +6,84 @@
 		<title>SimpleProxy</title>
 		<link rel="stylesheet" href="/admin/resources/css/main.css">
 		<script src="/admin/resources/js/jquery.js"></script>
+		<script src="/admin/resources/js/admin.js"></script>
 
 		<script>
 			var configJson ;
-			$.getJSON('/admin/config.json', function(data) {
-				console.log("CONFIG LOADED") ;
-				configJson = data ;
-				if ( !configJson )
-					configJson = {} ;
-			}) ;
+			window.admin.loadConfigs() ;
 
 			$(function() {
 				console.log("START NOW") ;
+				$('.config-manip').on('click', window.admin.manipulate ) ;
 			}) ;
 
 		</script>
-
-		<style>
-			#main {
-				border: 1px solid black ;
-     				-moz-border-radius: 20px;
-    				-webkit-border-radius: 20px;
-    				-khtml-border-radius: 20px;
-    				border-radius: 20px;
-				margin: 10px ;
-				padding: 10px ;
-			}
-		</style>
 	</head>
 
 	<body>
 		<div id="main">
 			<h1>SimpleProxy</h1>
 
-			<div id="configs"><div id="config-msg">Loading configuration files</div><div class="spinner"></div>
+			<div id="config-container">
+				<div id="config-loading">Loading configuration files
+					<div class="spinner"></div>
+				</div>
+
+				<div id="configs" class="hidden">
+					<div class="config-msg">Choose config file: </div>
+					<select id="config-select"></select>
+
+					<a href="#" class="config-manip tooltip ss_sprite ss_add" data-manip="add" data-tip="Create a new configuration"></a>
+					<a href="#" class="config-manip tooltip ss_sprite ss_application_edit" data-manip="edit" data-tip="Edit selected configuration"></a>
+					<a href="#" class="config-manip tooltip ss_sprite ss_application_delete" data-manip="delete" data-tip="Delete selected configuration"></a>
+
+				</div>
+			</div>
 		</div>
+
+		<form class="template hiddenx">
+		  <fieldset>
+  			<legend>SimpleProxy configuration</legend>
+		  <div>
+			<label for="remote-host">Remote host</label>
+			<input id="remote-host" type="text" placeholder="localhost" class="tooltip">
+			<a href="#" class="tooltip ss_sprite ss_information" data-tip="remote host name (--host)" ></a>
+		  </div>
+		  <div>
+			<label for="remote-port">Remote port</label>
+			<input id="remote-port" type="text" placeholder="80">
+			<a class="tooltip ss_sprite ss_information" data-tip="remote port number (--port)"></a>
+		  </div>
+		  <div>
+			<label for="proxy">proxy</label>
+			<input id="proxy" type="text" placeholder="true">
+			<a class="tooltip ss_sprite ss_information" data-tip="proxy (and cache) all request. If a request is already cached, it will be updated with the new response (--proxy)"></a>
+		  </div>
+		  <div>
+			<label for="proxy">ignore parameter</label>
+			<input id="proxy" type="text" placeholder="_dc,r">
+			<a class="tooltip ss_sprite ss_information" data-tip="A comma seperated list with parameters (POST or GET) to be ignored for cache requests lookup (--ignore-params"></a>
+		  </div>
+		  <fieldset>
+  			<legend>Route specific URLs:</legend>
+		        <div>
+				<label for="proxy">URL</label>
+				<input id="proxy" type="text" placeholder="/admin/configs/json/localhost.json">
+				<a class="tooltip ss_sprite ss_information" data-tip="proxy (and cache) all request. If a request is already cached, it will be updated with the new response (--map-url)"></a>
+		  	</div>
+		        <div>
+				<label for="proxy">Path</label>
+				<input id="proxy" type="text" placeholder="/Users/SP/files/admin/">
+				<a class="tooltip ss_sprite ss_information" data-tip="proxy (and cache) all request. If a request is already cached, it will be updated with the new response (--map-to-fs)"></a>
+		  	</div>
+		        <div>
+				<label for="proxy">Ignore specific extensions</label>
+				<input id="proxy" type="text" placeholder="jsp,asp,php">
+				<a class="tooltip ss_sprite ss_information" data-tip="A comma seperareted list with extensions which should not be mapped (--map-ignore-extensions)"></a>
+		  	</div>
+			<div id="add-url-map"><a href="#" class="config-manip tooltip ss_sprite ss_add" data-manip="add-route" data-tip="Create an other URL route"></a></div>
+ 		  </fieldset>
+ 		  </fieldset>
+		</form>
 	</body>
 </html>
