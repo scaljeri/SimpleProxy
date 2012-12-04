@@ -1,4 +1,5 @@
 @import "sprite" ;
+@import "mixins" ;
 
 #main {
         border: 1px solid black ;
@@ -41,7 +42,7 @@
 	}
 }
 
-a.tooltip {
+a.tooltip, span.tooltip {
 	position: relative;
 
 	&::before {
@@ -58,7 +59,7 @@ a.tooltip {
     		line-height: 24px;
     		height: 24px;
     		opacity: 0;
-    		transition:opacity 0.4s ease-out;
+    		@include experimental(transition, opacity 0.4s ease-out);
     	}
 	&:hover::before {
     		opacity: 1;
@@ -80,23 +81,79 @@ fieldset {
 	fieldset {
 		margin-top: 10px ;
 		margin-bottom: 10px ;
-		width: 400px ;
+		width: 91% ;
 	}
 	input {
 		width: 200px ;
+		&[type=radio] {
+			width: 20px ;
+			margin-left: 0px ;
+			&:nth-child(3) {
+				margin-left:10px;
+			}
+		}
 	}
+	& > div:nth-child(odd) {
+		background-color: #F8F8F8  ;
+	}
+	& > div:nth-child(even) {
+		background-color: lighten(#FFCCFF, 8%)  ;
+	}
+
+	#buttons {
+		margin-top: 13px;
+		position: relative ;
+		#action-msg {
+			width:140px;
+			margin-left:auto;
+			margin-right: auto
+		}
+		a.apply {
+			float: left ;
+			#apply {
+				width: 100px ;
+				@include experimental(box-shadow, 5px 5px 5px #888888) ;
+				margin-bottom: 2px ;
+			}
+		}
+	
+		a.save {
+			position: absolute ;
+			right: 0px ;
+			top: 0px ;
+			#save {
+				width: 40px ;
+				margin-right: 0px ;
+				@include experimental(box-shadow, 5px 5px 5px #888888) ;
+				margin-bottom: 2px ;
+			}
+		}
+		a:hover img {
+			@include experimental(box-shadow, 5px 5px 5px #400000!important ) ;
+		}
+		a:active img {
+			margin-top: 2px ;	
+			margin-bottom: 0px!important ;
+			@include experimental(box-shadow, 2px 2px 8px #400000!important ) ;
+		}
+	}	
 }
 
-#add-url-map {
+.add-route {
 	width: 100% ;
 	height: 20px ;
 	a {
 		display: inline-block ;
 		float: right;
-		margin-right: 10px ;
+		margin-right: 0px ;
 	}
 }
 
 .hidden {
 	display: none ;
+}
+
+.hand {
+	cursor: pointer;
+    	cursor: hand;
 }

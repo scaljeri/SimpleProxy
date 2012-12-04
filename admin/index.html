@@ -6,21 +6,48 @@
 		<title>SimpleProxy</title>
 		<link rel="stylesheet" href="/admin/resources/css/main.css">
 		<script src="/admin/resources/js/jquery.js"></script>
+		<script src="/admin/resources/js/handlebars.js"></script>
+		<script src="/admin/resources/js/handlebars-templates.js"></script>
 		<script src="/admin/resources/js/admin.js"></script>
 
 		<script>
+
 			var configJson ;
 			window.admin.loadConfigs() ;
 
 			$(function() {
 				console.log("START NOW") ;
-				$('.config-manip').on('click', window.admin.manipulate ) ;
+				$('.config-manip').live('click', window.admin.manipulate ) ;
+
+				//console.log(window.admin.templates.createRoutes({name: 'lucas'})) ;
+/*
+var r = {"routes": [
+                { "url": "/admin/config",
+                  "cache": "true",
+                  "host": "",
+                  "port": "",
+                  "path": "/User/admin",
+                  "ignore-extensions": "jsp,php"
+                },
+                { "url": "/cache/dn",
+                  "cache": "true",
+                  "host": "http://www.google.com",
+                  "port": "81",
+                  "path": "/User/",
+                  "ignore-extensions": "jsp,php"
+                }
+        ]} ;
+
+				console.log(window.admin.templates.createRoutes(r)) ;
+				$('#test').html(window.admin.templates.createRoutes(r) );
+*/
 			}) ;
 
 		</script>
 	</head>
 
 	<body>
+		<div id="test"></div>
 		<div id="main">
 			<h1>SimpleProxy</h1>
 
@@ -34,14 +61,13 @@
 					<select id="config-select"></select>
 
 					<a href="#" class="config-manip tooltip ss_sprite ss_add" data-manip="add" data-tip="Create a new configuration"></a>
-					<a href="#" class="config-manip tooltip ss_sprite ss_application_edit" data-manip="edit" data-tip="Edit selected configuration"></a>
 					<a href="#" class="config-manip tooltip ss_sprite ss_application_delete" data-manip="delete" data-tip="Delete selected configuration"></a>
 
 				</div>
 			</div>
 		</div>
 
-		<form class="template hiddenx">
+		<form id="route-config">
 		  <fieldset>
   			<legend>SimpleProxy configuration</legend>
 		  <div>
@@ -55,34 +81,67 @@
 			<a class="tooltip ss_sprite ss_information" data-tip="remote port number (--port)"></a>
 		  </div>
 		  <div>
-			<label for="proxy">proxy</label>
-			<input id="proxy" type="text" placeholder="true">
-			<a class="tooltip ss_sprite ss_information" data-tip="proxy (and cache) all request. If a request is already cached, it will be updated with the new response (--proxy)"></a>
+					<label for="proxy">Act as proxy only</label>
+					<div class="value-container" style="display:inline-block;width:206px">
+						<input id="proxy-only-true" type="radio" name="act-as-proxy" value="true">true
+						<input id="proxy-only-false" type="radio" name="act-as-proxy" value="false">false
+					</div>
+					<a class="tooltip ss_sprite ss_information" data-tip="No request will be served from cache, but each (new) response is written to cache (--act-as-proxy)"></a>
 		  </div>
 		  <div>
 			<label for="proxy">ignore parameter</label>
-			<input id="proxy" type="text" placeholder="_dc,r">
+			<input id="ignore-params" type="text" placeholder="_dc,r">
 			<a class="tooltip ss_sprite ss_information" data-tip="A comma seperated list with parameters (POST or GET) to be ignored for cache requests lookup (--ignore-params"></a>
 		  </div>
 		  <fieldset>
   			<legend>Route specific URLs:</legend>
-		        <div>
-				<label for="proxy">URL</label>
-				<input id="proxy" type="text" placeholder="/admin/configs/json/localhost.json">
-				<a class="tooltip ss_sprite ss_information" data-tip="proxy (and cache) all request. If a request is already cached, it will be updated with the new response (--map-url)"></a>
-		  	</div>
-		        <div>
-				<label for="proxy">Path</label>
-				<input id="proxy" type="text" placeholder="/Users/SP/files/admin/">
-				<a class="tooltip ss_sprite ss_information" data-tip="proxy (and cache) all request. If a request is already cached, it will be updated with the new response (--map-to-fs)"></a>
-		  	</div>
-		        <div>
-				<label for="proxy">Ignore specific extensions</label>
-				<input id="proxy" type="text" placeholder="jsp,asp,php">
-				<a class="tooltip ss_sprite ss_information" data-tip="A comma seperareted list with extensions which should not be mapped (--map-ignore-extensions)"></a>
-		  	</div>
-			<div id="add-url-map"><a href="#" class="config-manip tooltip ss_sprite ss_add" data-manip="add-route" data-tip="Create an other URL route"></a></div>
+			<div id="routes">
+				<div id="no-routes">No routes configured</div>
+			</div>
+			<div style="float:right">
+				<a href="#" style="text-decoration:none;" class="tooltip ss_sprite ss_add" data-tip="create new route">&nbsp;</a>
+			</div>
+			<div class="url-route">
+				<hr>
+				<h4>Route URL to host/ip or local filesystem:</h4>
+		        	<div>
+					<label>Incoming URL</label>
+					<input type="text" placeholder="/admin/configs/json/localhost.json">
+					<a class="tooltip ss_sprite ss_information" data-tip="proxy (and cache) all request. If a request is already cached, it will be updated with the new response (--map-url)"></a>
+		  		</div>
+		        	<div>
+					<label for="proxy">Cache request</label>
+					<div class="value-container" style="display:inline-block;width:206px">
+						<input type="radio" name="route-cache" value="true">true
+						<input type="radio" name="route-cache" value="false">false
+					</div>
+					<a class="tooltip ss_sprite ss_information" data-tip="Specify if caching should be enabled/disabled (--map-cache)"></a>
+		  		</div>
+				<div>
+					<label>Route to:</label>
+					<input type="radio" name="route-to" value="hostname">hostname/ip
+					<input type="radio" name="route-to" value="filesystem">Filesystem
+					<a style="margin-left:3px" class="tooltip ss_sprite ss_information" data-tip="Route a specific url to an other hostname/ip or to the local filesystem"></a>
+				</div>
+		        	<div class="path-or-host">
+					<label>Path or hostname</label>
+					<input type="text" placeholder="">
+					<a class="tooltip ss_sprite ss_information" data-tip="forward the request to the local filesystem (--map-to-fs)"></a>
+					<a class="tooltip ss_sprite ss_information" data-tip="proxy the request to an other host. If only an absolute path is defined the default hostname/port is used (--map-to-url)"></a>
+		  		</div>
+		        	<div>
+					<label for="proxy">Ignore specific extensions</label>
+					<div style="display:inline-block;vertical-align:top">
+						<input type="text" placeholder="jsp,asp,php">
+						<a class="tooltip ss_sprite ss_information" data-tip="A comma seperareted list with extensions which should not be mapped (--map-ignore-extensions)"></a>
+					</div>
+		  		</div>
+			</div>
  		  </fieldset>
+			<div id="buttons">
+					<a href="#" class="apply tooltip" data-tip="Reconfigure SimpleProxy. This doesn't save the modifications!!"><img id="apply" src="/admin/resources/images/apply_now_button.png"></a>
+					<a href="#" class="save tooltip" data-tip="Save changes"><img id="save" src="/admin/resources/images/save-button.png"></a>
+			</div>
  		  </fieldset>
 		</form>
 	</body>

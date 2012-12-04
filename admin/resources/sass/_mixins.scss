@@ -1,0 +1,18 @@
+/* Example:
+ *   @include experimental(tap-highlight-color, rgba(0,0,0,0), false) ;
+ *  -->
+ *  	tap-highlight-color, rgba(0,0,0,0) ;
+ *  	-webkit-tap-highlight-color, rgba(0,0,0,0) ;
+ *  	-ms-tap-highlight-color, rgba(0,0,0,0) ;
+ */
+@mixin experimental($property, $value, $prefix-value: false) {
+	#{$property}: $value ;
+	@if $prefix-value == true {
+		-webkit-#{$property}: -webkit-#{$value} ;
+		-ms-#{$property}: -ms-#{$value} ;
+	}
+	@else {
+		-webkit-#{$property}: $value ;
+		-ms-#{$property}: $value ;
+	}
+}

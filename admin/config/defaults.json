@@ -1,0 +1,23 @@
+{
+	"description": "These configuration settings are used if none is defined",
+	"remote-host": "localhost",
+	"remote-port": "8080",
+	"proxy-only": "false",
+	"ignore-params": "r",	
+	"routes": [
+		{ "url": "/admin/config",
+		  "cache": "true",
+		  "host": "",
+		  "port": "",
+		  "path": "/User/admin",
+		  "ignore-extensions": "jsp,php"
+		},
+		{ "url": "/cache/dn",
+		  "cache": "true",
+		  "host": "http://www.google.com",
+		  "port": "81",
+		  "path": "/User/",
+		  "ignore-extensions": "jsp,php"
+		}
+	]
+}
