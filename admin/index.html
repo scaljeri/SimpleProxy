@@ -13,41 +13,22 @@
 		<script>
 
 			var configJson ;
-			window.admin.loadConfigs() ;
+			//window.admin.loadConfigs() ;
 
 			$(function() {
 				console.log("START NOW") ;
-				$('.config-manip').live('click', window.admin.manipulate ) ;
+				//$('.config-manip').live('click', window.admin.manipulate ) ;
 
 				//console.log(window.admin.templates.createRoutes({name: 'lucas'})) ;
-/*
-var r = {"routes": [
-                { "url": "/admin/config",
-                  "cache": "true",
-                  "host": "",
-                  "port": "",
-                  "path": "/User/admin",
-                  "ignore-extensions": "jsp,php"
-                },
-                { "url": "/cache/dn",
-                  "cache": "true",
-                  "host": "http://www.google.com",
-                  "port": "81",
-                  "path": "/User/",
-                  "ignore-extensions": "jsp,php"
-                }
-        ]} ;
 
-				console.log(window.admin.templates.createRoutes(r)) ;
-				$('#test').html(window.admin.templates.createRoutes(r) );
-*/
+				console.log($('#admin-template').html()) ;
+				$('body').html( Handlebars.compile($('#admin-template').html()) ) ;
+				//$('body').html(window.admin.templates.createRoutes(r) );
 			}) ;
 
 		</script>
-	</head>
 
-	<body>
-		<div id="test"></div>
+		<script id="admin-template" type="text/x-handlebars-template">
 		<div id="main">
 			<h1>SimpleProxy</h1>
 
@@ -144,5 +125,7 @@ var r = {"routes": [
 			</div>
  		  </fieldset>
 		</form>
-	</body>
+		</script>
+	</head>
+	<body></body>
 </html>

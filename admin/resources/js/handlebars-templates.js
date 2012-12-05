@@ -6,6 +6,36 @@ window.admin.tooltips = {
 	"delete-route": "this is a tooltip - delete"	
 }
 
+
+
+window.admin.templates = {
+	createTooltipLink: Handlebars.compile(
+                [
+                        '<span ',
+                                'class="{{classes}} tooltip ss_sprite ss_{{icon}}" ',
+                                'data-tip="{{text}}">',
+                                        '&nbsp;',
+                        '</span>'
+                ].join('')),
+	createRoutes: Handlebars.compile(
+		[
+			'{{#each routes}}',
+				'<div>',
+					'<li>',
+						'{{url}} -- {{#createPath}}{{host}} {{port}} {{path}}{{/createPath}}',
+						'<div style="float:right">',
+							'{{#tooltipLink text="edit-route" icon="page_white_edit"}}{{/tooltipLink}}',
+							'{{#tooltipLink text="delete-route" icon="delete"}}{{/tooltipLink}}',
+						'</div>',
+					'</li>',
+				'<div>',
+			'{{/each}}'
+	       	].join('')
+	)
+};
+
+Handlebars.registerPartial('createTooltipLink', window.admin.templates.createTooltipLink ) ;
+
 Handlebars.registerHelper('createPath', function(options) {
 	
 	var output = this.path ;
@@ -23,28 +53,11 @@ Handlebars.registerHelper('createPath', function(options) {
 });
 
 Handlebars.registerHelper('tooltipLink', function(options) {
-	var classes = 'hand tooltip ss_sprite ss_' + options.hash.icon ;
-
-	return ['<span href="#"',
-		   'class="' +  classes + '" ',
-		   'data-tip="' + window.admin.tooltips[options.hash.text] + '">&nbsp;',
-		'</span>'].join('') ;
-	
-}) ;
-
-window.admin.templates = {
-	createRoutes: Handlebars.compile(
-		[
-			'{{#each routes}}',
-				'<div>',
-					'<li>',
-						'{{url}} -- {{#createPath}}{{host}} {{port}} {{path}}{{/createPath}}',
-						'<div style="float:right">',
-							'{{#tooltipLink text="edit-route" icon="page_white_edit"}}{{/tooltipLink}}',
-							'{{#tooltipLink text="delete-route" icon="delete"}}{{/tooltipLink}}',
-						'</div>',
-					'</li>',
-				'<div>',
-			'{{/each}}'
-	       	].join('')) 
-}
+	return window.admin.templates.createTooltipLink($.extend({},
+		this,
+		{
+			icon: options.hash.icon,
+			text: window.admin.tooltips[options.hash.text]
+		}
+	))}
+) ;
