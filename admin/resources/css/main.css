@@ -5048,24 +5048,25 @@
 /* line 31, ../sass/main.scss */
 #config-container .config-msg {
   display: inline-block;
-  width: 200px;
+  width: 140px;
 }
 /* line 35, ../sass/main.scss */
 #config-container select {
   width: 200px;
+  margin-right: 10px;
 }
-/* line 38, ../sass/main.scss */
+/* line 39, ../sass/main.scss */
 #config-container .spinner {
   width: 40px;
   height: 40px;
   float: right;
 }
 
-/* line 45, ../sass/main.scss */
+/* line 46, ../sass/main.scss */
 a.tooltip, span.tooltip {
   position: relative;
 }
-/* line 48, ../sass/main.scss */
+/* line 49, ../sass/main.scss */
 a.tooltip::before, span.tooltip::before {
   content: attr(data-tip);
   font-size: 13px;
@@ -5084,84 +5085,84 @@ a.tooltip::before, span.tooltip::before {
   -webkit-transition: opacity 0.4s ease-out;
   -ms-transition: opacity 0.4s ease-out;
 }
-/* line 64, ../sass/main.scss */
+/* line 65, ../sass/main.scss */
 a.tooltip:hover::before, span.tooltip:hover::before {
   opacity: 1;
   bottom: -35px;
 }
 
-/* line 70, ../sass/main.scss */
+/* line 71, ../sass/main.scss */
 label {
   margin-right: 10px;
   display: inline-block;
   width: 120px;
 }
 
-/* line 76, ../sass/main.scss */
+/* line 77, ../sass/main.scss */
 fieldset {
   border-radius: 10px;
   padding: 10px;
   margin-left: 10px;
   width: 500px;
 }
-/* line 81, ../sass/main.scss */
+/* line 82, ../sass/main.scss */
 fieldset fieldset {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 91%;
 }
-/* line 86, ../sass/main.scss */
+/* line 87, ../sass/main.scss */
 fieldset input {
   width: 200px;
 }
-/* line 88, ../sass/main.scss */
+/* line 89, ../sass/main.scss */
 fieldset input[type=radio] {
   width: 20px;
   margin-left: 0px;
 }
-/* line 91, ../sass/main.scss */
+/* line 92, ../sass/main.scss */
 fieldset input[type=radio]:nth-child(3) {
   margin-left: 10px;
 }
-/* line 96, ../sass/main.scss */
+/* line 97, ../sass/main.scss */
 fieldset > div:nth-child(odd) {
   background-color: #F8F8F8;
 }
-/* line 99, ../sass/main.scss */
+/* line 100, ../sass/main.scss */
 fieldset > div:nth-child(even) {
   background-color: #fff5ff;
 }
-/* line 103, ../sass/main.scss */
-fieldset #buttons {
+/* line 104, ../sass/main.scss */
+fieldset #action-buttons {
   margin-top: 13px;
   position: relative;
 }
-/* line 106, ../sass/main.scss */
-fieldset #buttons #action-msg {
+/* line 107, ../sass/main.scss */
+fieldset #action-buttons #action-msg {
   width: 140px;
   margin-left: auto;
   margin-right: auto;
 }
-/* line 111, ../sass/main.scss */
-fieldset #buttons a.apply {
+/* line 112, ../sass/main.scss */
+fieldset #action-buttons #apply {
   float: left;
 }
-/* line 113, ../sass/main.scss */
-fieldset #buttons a.apply #apply {
+/* line 114, ../sass/main.scss */
+fieldset #action-buttons #apply img {
   width: 100px;
   box-shadow: 5px 5px 5px #888888;
   -webkit-box-shadow: 5px 5px 5px #888888;
   -ms-box-shadow: 5px 5px 5px #888888;
   margin-bottom: 2px;
 }
-/* line 120, ../sass/main.scss */
-fieldset #buttons a.save {
+/* line 121, ../sass/main.scss */
+fieldset #action-buttons #save {
   position: absolute;
   right: 0px;
   top: 0px;
 }
-/* line 124, ../sass/main.scss */
-fieldset #buttons a.save #save {
+/* line 125, ../sass/main.scss */
+fieldset #action-buttons #save img {
   width: 40px;
   margin-right: 0px;
   box-shadow: 5px 5px 5px #888888;
@@ -5169,14 +5170,14 @@ fieldset #buttons a.save #save {
   -ms-box-shadow: 5px 5px 5px #888888;
   margin-bottom: 2px;
 }
-/* line 131, ../sass/main.scss */
-fieldset #buttons a:hover img {
+/* line 132, ../sass/main.scss */
+fieldset #action-buttons a:hover img {
   box-shadow: 5px 5px 5px #400000 !important;
   -webkit-box-shadow: 5px 5px 5px #400000 !important;
   -ms-box-shadow: 5px 5px 5px #400000 !important;
 }
-/* line 134, ../sass/main.scss */
-fieldset #buttons a:active img {
+/* line 135, ../sass/main.scss */
+fieldset #action-buttons a:active img {
   margin-top: 2px;
   margin-bottom: 0px!important;
   box-shadow: 2px 2px 8px #400000 !important;
@@ -5184,24 +5185,30 @@ fieldset #buttons a:active img {
   -ms-box-shadow: 2px 2px 8px #400000 !important;
 }
 
-/* line 142, ../sass/main.scss */
+/* line 143, ../sass/main.scss */
+.route-input {
+  display: inline-block;
+  width: 343px;
+}
+
+/* line 148, ../sass/main.scss */
 .add-route {
   width: 100%;
   height: 20px;
 }
-/* line 145, ../sass/main.scss */
+/* line 151, ../sass/main.scss */
 .add-route a {
   display: inline-block;
   float: right;
   margin-right: 0px;
 }
 
-/* line 152, ../sass/main.scss */
+/* line 158, ../sass/main.scss */
 .hidden {
   display: none;
 }
 
-/* line 156, ../sass/main.scss */
+/* line 162, ../sass/main.scss */
 .hand {
   cursor: pointer;
   cursor: hand;

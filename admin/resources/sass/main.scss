@@ -30,10 +30,11 @@
 	}
 	.config-msg {
 		display: inline-block ;
-		width: 200px ;
+		width: 140px ;
 	}
 	select {
 		width: 200px ;
+		margin-right: 10px ;
 	}
 	.spinner {
 		width: 40px ;
@@ -100,7 +101,7 @@ fieldset {
 		background-color: lighten(#FFCCFF, 8%)  ;
 	}
 
-	#buttons {
+	#action-buttons {
 		margin-top: 13px;
 		position: relative ;
 		#action-msg {
@@ -108,20 +109,20 @@ fieldset {
 			margin-left:auto;
 			margin-right: auto
 		}
-		a.apply {
+		#apply {
 			float: left ;
-			#apply {
+			img {
 				width: 100px ;
 				@include experimental(box-shadow, 5px 5px 5px #888888) ;
 				margin-bottom: 2px ;
 			}
 		}
 	
-		a.save {
+		#save {
 			position: absolute ;
 			right: 0px ;
 			top: 0px ;
-			#save {
+			img {
 				width: 40px ;
 				margin-right: 0px ;
 				@include experimental(box-shadow, 5px 5px 5px #888888) ;
@@ -137,6 +138,11 @@ fieldset {
 			@include experimental(box-shadow, 2px 2px 8px #400000!important ) ;
 		}
 	}	
+}
+
+.route-input {
+	display:inline-block;
+	width:343px ;
 }
 
 .add-route {
