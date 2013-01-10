@@ -4,66 +4,65 @@
 	<head>
 		<meta charset='utf-8'> 
 		<title>SimpleProxy</title>
-		<link rel="stylesheet" href="/admin/resources/css/main.css">
-		<script src="/admin/resources/js/jquery.js"></script>
-		<script src="/admin/resources/js/handlebars.js"></script>
-		<script src="/admin/resources/js/handlebars-templates.js"></script>
-		<script src="/admin/resources/js/admin.js"></script>
+
+		<script src="/admin/resources/js/curl.js"></script>
 
 		<script>
+			var cfg = {
+    				baseUrl: '/admin/resources/js/'
+			};
 
-			var configJson ;
+			curl(cfg, [
+				'css!../css/bootstrap.min.css',
+				'css!../css/main.css',
+            			'js!jquery.js',
+				'js!handlebars.js',
 
-			$(function() {
-				// build layout
-				$('#config-container').append(window.admin.templates.createConfigLoader({})) ;
-				$('#global-settings').append(window.admin.templates.createGlobalSettings({})) ;
-				$('#routes').append(window.admin.templates.noRoutesDefined({})) ;
-				$('#specific-settings').append(window.admin.templates.addRouteConfig({})) ;
+				'text!app/view/templates/application.html',
+				'text!app/view/templates/index.html'
+          		]).then(function(css, jq, hb, app, con) {
+				insertTpls( Array.prototype.splice.call(arguments, 3)) ;
 
-				//$('.config-manip').live('click', window.admin.manipulate ) ;
-				window.admin.loadConfigs() ;
-				window.admin.loadConfigs() ;
+				curl(cfg, [
+					'js!bootstrap.js',
+					'js!ember.js'
+				]).then(function(em) {
 
+					window.Sp = { Router: Ember.Router.extend() } ; // fake application object, it will make sure the initialization continues well!
+
+					curl(cfg, [
+						'js!app/model/BaseModel.js'
+					]).then(function(bm) {
+		
+						curl(cfg, [
+							'js!app/store/Store.js',
+							'js!app/router.js',
+							'js!app/model/ConfigModel.js',
+							'js!app/model/RouteModel.js',
+							'js!app/controller/ApplicationController.js',
+							'js!app/controller/IndexController.js',
+							//'js!app/controller/ConfigController.js',
+							//'js!app/view/ApplicationView.js',
+							//'js!app/view/ConfigView.js',
+							'js!app.js'
+						]).then(function(a){
+							window.Sp = Ember.Application.create(window.Sp) ;
+							//window.Sp.configStore = window.Sp.Store.create( { model: Sp.ConfigModel } ) ;
+							//Sp.configStore.find() ;
+						}) ;
+					}) ;
+				}) ;
 			}) ;
 
+			function insertTpls(tpls) {
+				var body = $('body') ;
+				tpls.forEach(function(tpl) {
+					body.append(tpl) ;
+				}) ;
+			}
 		</script>
 	</head>
 
 	<body>
-		<section>
-			<header>	
-       				<h1>SimpleProxy</h1>
-			</header>
-       			<article id="config-container"></article>
-		</section>
-
-		<section>
-       			<form id="route-config">
-               			<fieldset>
-                       			<legend>SimpleProxy configuration</legend>
-	
-                       			<article id="global-settings"></article>
-	
-					<article>
-                       				<fieldset>
-                               				<legend>Route specific URLs:</legend>
-	
-                               				<div id="routes"></div>  
-                               				<div id="specific-settings">
-                               			</fieldset>
-					</article>
-		
-                               		<div id="action-buttons">
-                                       		<a id="apply" href="#" class="apply tooltip" data-tip="Reconfigure SimpleProxy. This doesn't save the modifications!!">
-							<img src="/admin/resources/images/apply_now_button.png">
-						</a>
-                                       		<a id="save" href="#" class="save tooltip" data-tip="Save changes">
-							<img src="/admin/resources/images/save-button.png">
-						</a>
-                               		</div>  
-               			</fieldset>
-       			</form> 
-		</section>
 	</body>
 </html>
