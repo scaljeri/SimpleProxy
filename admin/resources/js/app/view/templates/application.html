@@ -1,15 +1,21 @@
 <script type="text/x-handlebars" data-template-name="application">
-	<section>
-		<header>
-			<h2>SimpleProxy Admin</h2>
-		</header>
-
-		<article>
-			{{outlet}}
-		</article>
-
-		<footer>
-			footer	
-		</footer>
-	</section>
+	<div class="parent">
+		<div id="application">
+			<section>
+				<header>
+					<h1>SimpleProxy Admin</h1>
+				</header>
+		
+				<article>
+					{{outlet}}
+				</article>
+			
+				<footer>
+					<div id="footer">
+						Found a bug? Please report it <a style="margin-left: 5px; font-size:1.6em;font-weight:bold" href="https://github.com/scaljeri/SimpleSlider">here</a>
+					</div>
+				</footer>
+			</section>
+		</div>
+	</div>
 </script>

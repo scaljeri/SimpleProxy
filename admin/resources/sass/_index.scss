@@ -1,0 +1,52 @@
+#index {
+	width: 100% ;
+	height: 100% ;
+	position: relative ;
+
+	.menu {
+		position: absolute ;
+		width: 35%;
+		height: 35%;
+
+		.img-container {
+			padding: 1em 2em 0 2em ;
+			height: auto ;
+			img {
+				width: 100% ;
+			}
+		}
+
+		h3 {
+			font-size: 1.8em ;
+			margin-top: 0px ;
+			text-align: center ;
+			text-shadow: 0 0 1px #999,
+             			1px 1px 1px #888,
+             			2px 2px 1px #777,
+             			3px 3px 1px #666,
+             			4px 4px 1px #555,
+             			5px 5px 1px #444;
+		}
+	}
+		
+
+	.config {
+		top: 10% ;
+		left: 10% ;
+	}
+
+	.log {
+		right: 10% ;
+		top: 10% ;
+	}
+	
+	.realtime {
+		bottom: 10% ;
+		left: 10% ;
+	}
+
+	.profiles {
+		bottom: 10% ;
+		right: 10% ;
+	}
+}

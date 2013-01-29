@@ -5,13 +5,19 @@
  *  	-webkit-tap-highlight-color, rgba(0,0,0,0) ;
  *  	-ms-tap-highlight-color, rgba(0,0,0,0) ;
  */
-@mixin experimental($property, $value, $prefix-value: false) {
+@mixin prefix-experimental($property, $value, $prefix-value: false, $prefix-property: true) {
 	#{$property}: $value ;
 	@if $prefix-value == true {
-		-webkit-#{$property}: -webkit-#{$value} ;
-		-ms-#{$property}: -ms-#{$value} ;
+		@if $prefix-property == true {
+			-webkit-#{$property}: -webkit-#{$value} ;
+			-ms-#{$property}: -ms-#{$value} ;
+		}
+		@else {
+			#{$property}: -webkit-#{$value} ;
+			#{$property}: -ms-#{$value} ;
+		}
 	}
-	@else {
+	@else if $prefix-property == true {
 		-webkit-#{$property}: $value ;
 		-ms-#{$property}: $value ;
 	}

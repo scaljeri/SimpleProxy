@@ -1,0 +1,183 @@
+/* Example:
+ *   @include experimental(tap-highlight-color, rgba(0,0,0,0), false) ;
+ *  -->
+ *  	tap-highlight-color, rgba(0,0,0,0) ;
+ *  	-webkit-tap-highlight-color, rgba(0,0,0,0) ;
+ *  	-ms-tap-highlight-color, rgba(0,0,0,0) ;
+ */
+/* line 1, ../sass/rotate.scss */
+.rotate_container {
+  position: relative;
+  margin: 10px auto;
+  width: 450px;
+  height: 281px;
+  z-index: 1;
+  perspective: 1000;
+  -webkit-perspective: 1000;
+}
+
+/* line 11, ../sass/rotate.scss */
+.card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1.0s linear;
+  -webkit-transition: -webkit-transform 1.0s linear;
+  -webkit-transform-style: preserve-3d;
+}
+
+/* line 20, ../sass/rotate.scss */
+.rotate_container.flipped .card {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+/* line 24, ../sass/rotate.scss */
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* line 31, ../sass/rotate.scss */
+.face.back {
+  display: block;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  /*background-color: #aaa;*/
+}
+
+/* line 1, ../sass/_application.scss */
+#application {
+  height: 500px;
+  width: 500px;
+}
+/* line 5, ../sass/_application.scss */
+#application > section {
+  height: 100%;
+}
+/* line 9, ../sass/_application.scss */
+#application header h1 {
+  text-align: center;
+}
+/* line 13, ../sass/_application.scss */
+#application #footer {
+  font-size: 1.4em;
+  text-align: center;
+  background-image: url(../img/sp-logo.png), url(../img/bug-icon.png);
+  background-repeat: no-repeat;
+  background-size: 3em 3em, 2.8em 2.8em;
+  background-position: left center, right center;
+  padding-left: 3em;
+  padding-right: 3em;
+  line-height: 3em;
+}
+
+/* line 1, ../sass/_index.scss */
+#index {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+/* line 6, ../sass/_index.scss */
+#index .menu {
+  position: absolute;
+  width: 35%;
+  height: 35%;
+}
+/* line 11, ../sass/_index.scss */
+#index .menu .img-container {
+  padding: 1em 2em 0 2em;
+  height: auto;
+}
+/* line 14, ../sass/_index.scss */
+#index .menu .img-container img {
+  width: 100%;
+}
+/* line 19, ../sass/_index.scss */
+#index .menu h3 {
+  font-size: 1.8em;
+  margin-top: 0px;
+  text-align: center;
+  text-shadow: 0 0 1px #999999, 1px 1px 1px #888888, 2px 2px 1px #777777, 3px 3px 1px #666666, 4px 4px 1px #555555, 5px 5px 1px #444444;
+}
+/* line 33, ../sass/_index.scss */
+#index .config {
+  top: 10%;
+  left: 10%;
+}
+/* line 38, ../sass/_index.scss */
+#index .log {
+  right: 10%;
+  top: 10%;
+}
+/* line 43, ../sass/_index.scss */
+#index .realtime {
+  bottom: 10%;
+  left: 10%;
+}
+/* line 48, ../sass/_index.scss */
+#index .profiles {
+  bottom: 10%;
+  right: 10%;
+}
+
+/* line 7, ../sass/styles.scss */
+body {
+  font-family: Iceland;
+  font-size: 15px;
+  color: white;
+}
+
+/* line 13, ../sass/styles.scss */
+div, section, article {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
+
+/* Heading kerning pairs and ligatures */
+/* line 21, ../sass/styles.scss */
+h1, h2, h3 {
+  text-rendering: optimizeLegibility;
+}
+
+/* line 23, ../sass/styles.scss */
+h1 {
+  font-size: 3em;
+}
+
+/* line 27, ../sass/styles.scss */
+h2 {
+  font-size: 2em;
+}
+
+/* line 31, ../sass/styles.scss */
+div.bg {
+  margin: 0 0 0 0;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
+  -o-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* line 44, ../sass/styles.scss */
+.parent {
+  position: relative;
+  width: 500px;
+  margin: 30px auto;
+}

@@ -1,0 +1,27 @@
+#application { 
+	height: 500px ;
+	width: 500px ;
+
+	& > section {
+		height: 100% ;
+	}
+
+	header h1 {
+		text-align: center ;
+	}
+
+	#footer {
+		font-size: 1.4em ;
+		text-align: center ;
+		background: {
+			image: url(../img/sp-logo.png), url(../img/bug-icon.png) ;
+			repeat: no-repeat ;
+			size:3em 3em, 2.8em 2.8em;
+			position: left center, right center;
+		}
+		padding-left: 3em ;
+		padding-right: 3em ;
+		line-height: 3em ;
+		
+	}
+}

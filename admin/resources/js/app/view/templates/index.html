@@ -1,4 +1,31 @@
 <script type="text/x-handlebars" data-template-name="index">
-	load configuration
+	<div id="index">
+		{{#view Sp.ClickableView}}
+			<div class="menu config bg">
+				<div class="img-container">
+                			<img src="resources/img/config-icon.png">
+        			</div>
+        			<h3>Configuration</h3>
+			</div>
+		{{/view}}
+		<div class="menu log bg">
+			<div class="img-container">
+                		<img src="resources/img/log-icon.png">
+        		</div>
+        		<h3>Log Overview</h3>
+		</div>
+		<div class="menu realtime bg">
+			<div class="img-container">
+                		<img src="resources/img/realtime-icon.png">
+        		</div>
+        		<h3>Realtime</h3>
+		</div>
+		<div class="menu profiles bg">
+			<div class="img-container">
+                		<img src="resources/img/database-icon.png">
+        		</div>
+			<h3>Cache Search</h3>
+		</div>
+	</div>
 </script>
 

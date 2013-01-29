@@ -1,0 +1,48 @@
+@import "mixins" ;
+@import "rotate" ;
+@import "application" ;
+@import "index" ;
+
+
+body {
+	font-family: Iceland ;
+	font-size: 15px ;
+	color: white ;
+}
+
+div, section, article {
+	width: 100% ;
+	height: 100% ;
+	@include prefix-experimental(box-sizing, border-box) ;
+}
+
+// http://menacingcloud.com/?c=highPixelDensityDisplays
+/* Heading kerning pairs and ligatures */
+h1, h2, h3 { text-rendering: optimizeLegibility; }
+
+h1 {
+	font-size: 3em ;
+}
+
+h2 {
+	font-size: 2em ;
+}
+
+div.bg {
+	margin: 0 0 0 0;
+	padding: 0;
+	border: 1px solid rgba(0,0,0,0.5);
+	border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px;
+	background: rgba(255,255,255,0.25);
+	box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+	-o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+}       
+
+.parent {
+	position: relative ;
+	width: 500px ;
+	margin: 30px auto ;
+}

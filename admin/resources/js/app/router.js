@@ -3,13 +3,14 @@ Sp.Router.map(function(match) {
 });
 
 Sp.IndexRoute = Ember.Route.extend({
+  /*
   model: function(){
 	return Sp.ConfigModel.create() ;
   },
   renderTemplate: function(controller, model) {
-debugger ;
     this.render('index');
   }
+  */
 });
 
 /*
