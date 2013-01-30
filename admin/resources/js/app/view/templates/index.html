@@ -1,13 +1,28 @@
 <script type="text/x-handlebars" data-template-name="index">
 	<div id="index">
-		{{#view Sp.ClickableView}}
+        <div class="menu config">
+            {{outlet config}}
+        </div>
+
+        <div class="menu log">
+            {{outlet logging}}
+        </div>
+
+        <div class="menu realtime">
+            {{outlet realtime}}
+        </div>
+
+        <div class="menu profiles">
+            {{outlet search}}
+        </div>
+
+        <!--
 			<div class="menu config bg">
 				<div class="img-container">
                 			<img src="resources/img/config-icon.png">
         			</div>
         			<h3>Configuration</h3>
 			</div>
-		{{/view}}
 		<div class="menu log bg">
 			<div class="img-container">
                 		<img src="resources/img/log-icon.png">
@@ -26,6 +41,7 @@
         		</div>
 			<h3>Cache Search</h3>
 		</div>
+		-->
 	</div>
 </script>
 

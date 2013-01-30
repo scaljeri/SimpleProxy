@@ -1,13 +1,12 @@
 <script type="text/x-handlebars" data-template-name="rotatable">
-	<div class="rotate_container">
-        	<div class="card">
-                	<div class="front face">
-                        	<img src="http://css3.bradshawenterprises.com/images/Cirques.jpg"/>
-                	</div>
-                	<div class="back face center">
-                        	<p>This is nice for exposing more information about an image.</p>
-                        	<p>Any content can go here.</p>
-                	</div>
-        	</div>
-	</div>
+    <div class="flip-container">
+        <div class="flipper">
+            <div class="front">
+                {{outlet front}}
+            </div>
+            <div class="back">
+                {{outlet back}}
+            </div>
+        </div>
+    </div>
 </script>
