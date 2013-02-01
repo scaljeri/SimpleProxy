@@ -1,47 +1,20 @@
 <script type="text/x-handlebars" data-template-name="index">
 	<div id="index">
-        <div class="menu config">
+        <div class="menu config positionable resizable" data-state="config">
             {{outlet config}}
         </div>
 
-        <div class="menu log">
+        <div class="menu log positionable resizable" data-state="log">
             {{outlet logging}}
         </div>
 
-        <div class="menu realtime">
+        <div class="menu realtime positionable resizable" data-state="realtime">
             {{outlet realtime}}
         </div>
 
-        <div class="menu profiles">
+        <div class="menu profiles positionable resizable" data-state="search">
             {{outlet search}}
         </div>
-
-        <!--
-			<div class="menu config bg">
-				<div class="img-container">
-                			<img src="resources/img/config-icon.png">
-        			</div>
-        			<h3>Configuration</h3>
-			</div>
-		<div class="menu log bg">
-			<div class="img-container">
-                		<img src="resources/img/log-icon.png">
-        		</div>
-        		<h3>Log Overview</h3>
-		</div>
-		<div class="menu realtime bg">
-			<div class="img-container">
-                		<img src="resources/img/realtime-icon.png">
-        		</div>
-        		<h3>Realtime</h3>
-		</div>
-		<div class="menu profiles bg">
-			<div class="img-container">
-                		<img src="resources/img/database-icon.png">
-        		</div>
-			<h3>Cache Search</h3>
-		</div>
-		-->
 	</div>
 </script>
 

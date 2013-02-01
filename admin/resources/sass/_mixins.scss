@@ -6,19 +6,27 @@
  *  	-ms-tap-highlight-color, rgba(0,0,0,0) ;
  */
 @mixin prefix-experimental($property, $value, $prefix-value: false, $prefix-property: true) {
+    $value: unquote($value) ; // remove quotes from the value string (if any)
+
 	#{$property}: $value ;
 	@if $prefix-value == true {
 		@if $prefix-property == true {
 			-webkit-#{$property}: -webkit-#{$value} ;
-			-ms-#{$property}: -ms-#{$value} ;
+            -moz-#{$property}:    -moz-#{$value} ;
+			-ms-#{$property}:     -ms-#{$value} ;
+            -o-#{$property}:      -o-#{$value} ;
 		}
 		@else {
 			#{$property}: -webkit-#{$value} ;
+            #{$property}: -moz-#{$value} ;
 			#{$property}: -ms-#{$value} ;
+            #{$property}: -o-#{$value} ;
 		}
 	}
 	@else if $prefix-property == true {
 		-webkit-#{$property}: $value ;
-		-ms-#{$property}: $value ;
+        -moz-#{$property}:    $value ;
+		-ms-#{$property}:     $value ;
+        -o-#{$property}:      $value ;
 	}
 }

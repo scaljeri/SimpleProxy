@@ -1,6 +1,6 @@
 Sp.ClickableView = Em.View.extend({
 	click: function(e) {
 		console.log("CLICK");
-        $(e.target).closest(".flip-container").toggleClass("rotate") ;
+        this.get("controller").send("showMenuItem", e, $(e.target).closest(".menu") ) ;
 	}
 });

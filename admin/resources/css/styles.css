@@ -62,21 +62,21 @@
 /* line 33, ../sass/_index.scss */
 #index .config {
   top: 10%;
-  left: 10%;
+  right: 55%;
 }
-/* line 38, ../sass/_index.scss */
+/* line 39, ../sass/_index.scss */
 #index .log {
   right: 10%;
   top: 10%;
 }
-/* line 43, ../sass/_index.scss */
+/* line 44, ../sass/_index.scss */
 #index .realtime {
-  bottom: 10%;
-  left: 10%;
+  top: 55%;
+  right: 55%;
 }
-/* line 48, ../sass/_index.scss */
+/* line 49, ../sass/_index.scss */
 #index .profiles {
-  bottom: 10%;
+  top: 55%;
   right: 10%;
 }
 
@@ -85,7 +85,9 @@
 .flip-container {
   perspective: 1000;
   -webkit-perspective: 1000;
+  -moz-perspective: 1000;
   -ms-perspective: 1000;
+  -o-perspective: 1000;
 }
 
 /* flip the pane when hovered */
@@ -93,7 +95,9 @@
 .flip-container.rotate .flipper {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
   -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
 }
 
 /* line 10, ../sass/_rotatable.scss */
@@ -107,10 +111,14 @@
 .flipper {
   transition: 0.6s;
   -webkit-transition: 0.6s;
+  -moz-transition: 0.6s;
   -ms-transition: 0.6s;
+  -o-transition: 0.6s;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
   -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
   position: relative;
 }
 
@@ -119,7 +127,9 @@
 .front, .back {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -136,7 +146,9 @@
 .back {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
   -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
 }
 
 /* line 7, ../sass/styles.scss */
@@ -152,7 +164,9 @@ div, section, article {
   height: 100%;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
 }
 
 /* Heading kerning pairs and ligatures */
@@ -190,4 +204,18 @@ div.bg {
   position: relative;
   width: 500px;
   margin: 30px auto;
+}
+
+/* line 50, ../sass/styles.scss */
+.positionable {
+  transition: top 0.6s, left 0.6s, right 0.6s, bottom 0.6s, height 0.6s, width 0.6s;
+  -webkit-transition: top 0.6s, left 0.6s, right 0.6s, bottom 0.6s, height 0.6s, width 0.6s;
+  -moz-transition: top 0.6s, left 0.6s, right 0.6s, bottom 0.6s, height 0.6s, width 0.6s;
+  -ms-transition: top 0.6s, left 0.6s, right 0.6s, bottom 0.6s, height 0.6s, width 0.6s;
+  -o-transition: top 0.6s, left 0.6s, right 0.6s, bottom 0.6s, height 0.6s, width 0.6s;
+}
+
+/* line 54, ../sass/styles.scss */
+.resizable {
+  /*@include prefix-experimental(transition, "width 0.6s, height 0.6s") ;*/
 }

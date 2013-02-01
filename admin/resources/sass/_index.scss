@@ -32,7 +32,8 @@
 
 	.config {
 		top: 10% ;
-		left: 10% ;
+		//left: 10% ;
+        right: 55% ;
 	}
 
 	.log {
@@ -41,12 +42,12 @@
 	}
 	
 	.realtime {
-		bottom: 10% ;
-		left: 10% ;
+		top: 55% ;
+		right: 55% ;
 	}
 
 	.profiles {
-		bottom: 10% ;
+		top: 55% ;
 		right: 10% ;
 	}
 }

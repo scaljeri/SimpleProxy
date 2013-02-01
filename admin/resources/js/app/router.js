@@ -26,6 +26,11 @@ Sp.IndexRoute = Ember.Route.extend({
         this.render('clickable', {into: 'rotatable', outlet: 'front'}) ;
         this.render('menusearch', {into: 'clickable'}) ;
         this.render('search', {into: 'rotatable', outlet: 'back'}) ;
+    },
+
+    doStuff: function(e) {
+        console.log("DOSTUFF") ;
+        debugger ;
     }
   /*
   model: function(){

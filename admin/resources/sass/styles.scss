@@ -46,3 +46,11 @@ div.bg {
 	width: 500px ;
 	margin: 30px auto ;
 }
+
+.positionable {
+  @include prefix-experimental(transition, "top 0.6s, left 0.6s, right 0.6s, bottom 0.6s, height 0.6s, width 0.6s") ;
+}
+
+.resizable {
+  /*@include prefix-experimental(transition, "width 0.6s, height 0.6s") ;*/
+}
