@@ -9,5 +9,10 @@
     .img-container {
       padding: 0!important ;
     }
+
+    &:hover {
+      width: 60px!important ;
+      height: 60px!important ;
+    }
   }
 }

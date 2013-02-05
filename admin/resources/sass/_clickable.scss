@@ -1,0 +1,8 @@
+.clickable {
+  cursor: hand;
+  cursor: pointer;
+
+  &.disabled {
+    cursor: default!important ;
+  }
+}
