@@ -3,7 +3,7 @@
 	height: 100% ;
 	position: relative ;
 
-	.menu {
+	.menu-item {
 		position: absolute ;
 		width: 35%;
 		height: 35%;
@@ -27,26 +27,35 @@
              			4px 4px 1px #555,
              			5px 5px 1px #444;
 		}
+
+        &.selected {
+            //@include prefix-experimental
+            top: 0!important;
+            left: 0!important;
+            width: 100%!important ;
+            height: 100%!important ;
+        }
 	}
 		
 
-	.config {
+  /* Position the 4 menu items */
+	#configuration {
 		top: 10% ;
 		//left: 10% ;
         right: 55% ;
 	}
 
-	.log {
+	#log {
 		right: 10% ;
 		top: 10% ;
 	}
 	
-	.realtime {
+	#realtime {
 		top: 55% ;
 		right: 55% ;
 	}
 
-	.profiles {
+	#search {
 		top: 55% ;
 		right: 10% ;
 	}

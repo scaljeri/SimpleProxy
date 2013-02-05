@@ -36,46 +36,54 @@
   width: 100%;
   height: 100%;
   position: relative;
+  /* Position the 4 menu items */
 }
 /* line 6, ../sass/_index.scss */
-#index .menu {
+#index .menu-item {
   position: absolute;
   width: 35%;
   height: 35%;
 }
 /* line 11, ../sass/_index.scss */
-#index .menu .img-container {
+#index .menu-item .img-container {
   padding: 1em 2em 0 2em;
   height: auto;
 }
 /* line 14, ../sass/_index.scss */
-#index .menu .img-container img {
+#index .menu-item .img-container img {
   width: 100%;
 }
 /* line 19, ../sass/_index.scss */
-#index .menu h3 {
+#index .menu-item h3 {
   font-size: 1.8em;
   margin-top: 0px;
   text-align: center;
   text-shadow: 0 0 1px #999999, 1px 1px 1px #888888, 2px 2px 1px #777777, 3px 3px 1px #666666, 4px 4px 1px #555555, 5px 5px 1px #444444;
 }
-/* line 33, ../sass/_index.scss */
-#index .config {
+/* line 31, ../sass/_index.scss */
+#index .menu-item.selected {
+  top: 0!important;
+  left: 0!important;
+  width: 100%!important;
+  height: 100%!important;
+}
+/* line 42, ../sass/_index.scss */
+#index #configuration {
   top: 10%;
   right: 55%;
 }
-/* line 39, ../sass/_index.scss */
-#index .log {
+/* line 48, ../sass/_index.scss */
+#index #log {
   right: 10%;
   top: 10%;
 }
-/* line 44, ../sass/_index.scss */
-#index .realtime {
+/* line 53, ../sass/_index.scss */
+#index #realtime {
   top: 55%;
   right: 55%;
 }
-/* line 49, ../sass/_index.scss */
-#index .profiles {
+/* line 58, ../sass/_index.scss */
+#index #search {
   top: 55%;
   right: 10%;
 }
@@ -88,10 +96,12 @@
   -moz-perspective: 1000;
   -ms-perspective: 1000;
   -o-perspective: 1000;
+  width: 100%;
+  height: 100%;
+  /* front pane, placed above back */
+  /* back, initially hidden pane */
 }
-
-/* flip the pane when hovered */
-/* line 6, ../sass/_rotatable.scss */
+/* line 7, ../sass/_rotatable.scss */
 .flip-container.rotate .flipper {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
@@ -99,16 +109,13 @@
   -ms-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
 }
-
-/* line 10, ../sass/_rotatable.scss */
-.flip-container, .front, .back {
+/* line 11, ../sass/_rotatable.scss */
+.flip-container .front, .flip-container back {
   width: 100%;
   height: 100%;
 }
-
-/* flip speed goes here */
 /* line 16, ../sass/_rotatable.scss */
-.flipper {
+.flip-container .flipper {
   transition: 0.6s;
   -webkit-transition: 0.6s;
   -moz-transition: 0.6s;
@@ -121,10 +128,8 @@
   -o-transform-style: preserve-3d;
   position: relative;
 }
-
-/* hide back of pane during swap */
-/* line 24, ../sass/_rotatable.scss */
-.front, .back {
+/* line 23, ../sass/_rotatable.scss */
+.flip-container .front, .flip-container .back {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
@@ -134,16 +139,12 @@
   top: 0;
   left: 0;
 }
-
-/* front pane, placed above back */
-/* line 33, ../sass/_rotatable.scss */
-.front {
+/* line 32, ../sass/_rotatable.scss */
+.flip-container .front {
   z-index: 2;
 }
-
-/* back, initially hidden pane */
-/* line 38, ../sass/_rotatable.scss */
-.back {
+/* line 37, ../sass/_rotatable.scss */
+.flip-container .back {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
@@ -151,14 +152,44 @@
   -o-transform: rotateY(180deg);
 }
 
-/* line 7, ../sass/styles.scss */
+/* line 2, ../sass/_positionable.scss */
+.positionable.top {
+  right: -35px !important;
+  top: -10px !important;
+}
+/* line 8, ../sass/_positionable.scss */
+.positionable.middle {
+  right: -35px !important;
+  top: 50px!important;
+}
+/* line 13, ../sass/_positionable.scss */
+.positionable.bottom {
+  right: -35px !important;
+  top: 110px!important;
+}
+
+/* line 2, ../sass/_iconizable.scss */
+.iconizable.icon {
+  width: 50px!important;
+  height: 50px!important;
+}
+/* line 6, ../sass/_iconizable.scss */
+.iconizable.icon h3 {
+  display: none;
+}
+/* line 9, ../sass/_iconizable.scss */
+.iconizable.icon .img-container {
+  padding: 0!important;
+}
+
+/* line 9, ../sass/styles.scss */
 body {
   font-family: Iceland;
   font-size: 15px;
   color: white;
 }
 
-/* line 13, ../sass/styles.scss */
+/* line 15, ../sass/styles.scss */
 div, section, article {
   width: 100%;
   height: 100%;
@@ -170,43 +201,47 @@ div, section, article {
 }
 
 /* Heading kerning pairs and ligatures */
-/* line 21, ../sass/styles.scss */
+/* line 23, ../sass/styles.scss */
 h1, h2, h3 {
   text-rendering: optimizeLegibility;
 }
 
-/* line 23, ../sass/styles.scss */
+/* line 25, ../sass/styles.scss */
 h1 {
   font-size: 3em;
 }
 
-/* line 27, ../sass/styles.scss */
+/* line 29, ../sass/styles.scss */
 h2 {
   font-size: 2em;
 }
 
-/* line 31, ../sass/styles.scss */
+/* line 33, ../sass/styles.scss */
 div.bg {
   margin: 0 0 0 0;
   padding: 0;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px 10px 10px 10px;
-  -webkit-border-radius: 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -ms-border-radius: 10px 10px 10px 10px;
+  -o-border-radius: 10px 10px 10px 10px;
   background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
-  -o-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+  -ms-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
 }
 
-/* line 44, ../sass/styles.scss */
+/* line 42, ../sass/styles.scss */
 .parent {
   position: relative;
   width: 500px;
   margin: 30px auto;
 }
 
-/* line 50, ../sass/styles.scss */
+/* line 48, ../sass/styles.scss */
 .positionable {
   transition: top 0.6s, left 0.6s, right 0.6s, bottom 0.6s, height 0.6s, width 0.6s;
   -webkit-transition: top 0.6s, left 0.6s, right 0.6s, bottom 0.6s, height 0.6s, width 0.6s;
@@ -215,7 +250,7 @@ div.bg {
   -o-transition: top 0.6s, left 0.6s, right 0.6s, bottom 0.6s, height 0.6s, width 0.6s;
 }
 
-/* line 54, ../sass/styles.scss */
+/* line 52, ../sass/styles.scss */
 .resizable {
   /*@include prefix-experimental(transition, "width 0.6s, height 0.6s") ;*/
 }

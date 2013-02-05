@@ -1,0 +1,13 @@
+.iconizable {
+  &.icon {
+    width: 50px!important ;
+    height: 50px!important ;
+
+    h3 {
+      display: none ;
+    }
+    .img-container {
+      padding: 0!important ;
+    }
+  }
+}
