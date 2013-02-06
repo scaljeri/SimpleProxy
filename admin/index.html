@@ -5,7 +5,9 @@
 		<meta charset='utf-8'> 
 		<title>SimpleProxy</title>
 
+        <!--
 		<link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
+		-->
 
 		<style>
 			html, body {
@@ -413,6 +415,7 @@
 			};
 
 			curl(cfg, [
+                'css!http://fonts.googleapis.com/css?family=Iceland&type=', // &type= is a fix, curl add ".css" at the end :(
 				'css!../css/bootstrap.min.css',
 				'css!../css/styles.css',
 				//'css!../css/ui-lightness/jquery-ui-1.10.0.custom.css',
@@ -448,7 +451,8 @@
 		
 						curl(cfg, [
 							'js!app/store/Store.js',
-						    'js!app/routes/IndexConfigurationRoute.js',
+						    'js!app/routes/IndexRoute.js',
+                            'js!app/routes/IndexConfigurationRoute.js',
                             'js!app/routes/IndexLogRoute.js',
 							'js!app/model/ConfigModel.js',
 							'js!app/model/RouteModel.js',
