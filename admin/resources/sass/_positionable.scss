@@ -1,17 +1,17 @@
 .positionable {
   &.top {
-    right: -35px!important ;
+    left: 100%!important ;
     top: -10px!important ;
   }
 
 
   &.middle {
-    right: -35px!important ;
+    left: 100%!important ;
     top: 50px!important ;
   }
 
   &.bottom {
-    right: -35px!important ;
+    left: 100%!important ;
     top: 110px!important ;
   }
 }

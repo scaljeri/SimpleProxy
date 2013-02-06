@@ -70,22 +70,22 @@
 /* line 42, ../sass/_index.scss */
 #index #configuration {
   top: 10%;
-  right: 55%;
+  left: 10%;
 }
 /* line 48, ../sass/_index.scss */
 #index #log {
-  right: 10%;
+  left: 55%;
   top: 10%;
 }
 /* line 53, ../sass/_index.scss */
 #index #realtime {
   top: 55%;
-  right: 55%;
+  left: 10%;
 }
 /* line 58, ../sass/_index.scss */
 #index #search {
   top: 55%;
-  right: 10%;
+  left: 55%;
 }
 
 /* entire container, keeps perspective */
@@ -154,17 +154,17 @@
 
 /* line 2, ../sass/_positionable.scss */
 .positionable.top {
-  right: -35px !important;
+  left: 100%!important;
   top: -10px !important;
 }
 /* line 8, ../sass/_positionable.scss */
 .positionable.middle {
-  right: -35px !important;
+  left: 100%!important;
   top: 50px!important;
 }
 /* line 13, ../sass/_positionable.scss */
 .positionable.bottom {
-  right: -35px !important;
+  left: 100%!important;
   top: 110px!important;
 }
 
@@ -268,4 +268,28 @@ div.bg {
 /* line 53, ../sass/styles.scss */
 .resizable {
   /*@include prefix-experimental(transition, "width 0.6s, height 0.6s") ;*/
+}
+
+/* line 58, ../sass/styles.scss */
+html, body, div, span, object,
+form, input, h1, h2, h3, button, label, a, img {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -ms-user-drag: none;
+  -o-user-drag: none;
+}
+
+/* line 63, ../sass/styles.scss */
+input[type=text] {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -o-user-select: text;
 }

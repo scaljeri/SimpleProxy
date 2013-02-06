@@ -1,25 +1,13 @@
 Sp.Router.map(function() {
     this.resource('index', { path: '/' }, function() {
-        this.route('config', { path: '/configuration' });
+        this.route('configuration', { path: 'configuration' }); // index.configuration
+        this.route('log', { path: 'log'}) ; // index.log
     }) ;
-    //match('/').to('index');
-    //match('/config').to('config');
 });
 
-Sp.IndexConfigRoute = Ember.Route.extend({
-    enter: function() {
-        var controller = this.controllerFor('application');
-        controller.set("activeMenuItem", 'configuration') ;
-    }/*,
-    renderTemplate: function(controller, model) {
-
-    }*/
-
-}) ;
 
 Sp.IndexRoute = Ember.Route.extend({
     renderTemplate: function(controller, model) {
-        console.log("STEP 1") ;
         this.render('index');
 
         this.render('rotatable', {into: 'index', outlet: 'config'}) ;
@@ -31,7 +19,7 @@ Sp.IndexRoute = Ember.Route.extend({
         this.render('rotatable', {into: 'index', outlet: 'logging'}) ;
         this.render('clickable', {into: 'rotatable', outlet: 'front'}) ;
         this.render('menulogging', {into: 'clickable'}) ;
-        this.render('logging', {into: 'rotatable', outlet: 'back'}) ;
+        this.render('log', {into: 'rotatable', outlet: 'back'}) ;
 
         this.render('rotatable', {into: 'index', outlet: 'realtime'}) ;
         this.render('clickable', {into: 'rotatable', outlet: 'front'}) ;

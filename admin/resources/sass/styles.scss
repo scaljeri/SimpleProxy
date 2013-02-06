@@ -53,3 +53,13 @@ div.bg {
 .resizable {
   /*@include prefix-experimental(transition, "width 0.6s, height 0.6s") ;*/
 }
+
+html, body, div, span, object,
+form, input, h1, h2, h3, button, label, a, img  {
+  @include prefix-experimental(user-select, none) ;
+  @include prefix-experimental(user-drag, none);
+}
+
+input[type=text] {
+  @include prefix-experimental(user-select, text);
+}
