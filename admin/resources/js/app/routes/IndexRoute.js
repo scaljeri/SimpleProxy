@@ -4,7 +4,8 @@ Sp.IndexRoute = Ember.Route.extend({
 
         this.render('rotatable', {into: 'index', outlet: 'config'}) ;
         this.render('clickable', {into: 'rotatable', outlet: 'front'}) ;
-        this.render('menuconfig', {into: 'clickable'}) ;
+        debugger ;
+        this.render('configMenuItem', {into: 'clickable'}) ;
         //this.render('clickable', {into: 'rotatable', outlet: 'back'}) ;
         this.render('configuration', {into: 'rotatable', outlet: 'back'}) ;
 
