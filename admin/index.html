@@ -422,7 +422,7 @@
 
 				'text!app/view/templates/application.html',
 				'text!app/view/templates/index.html',
-				'text!app/view/templates/configmenuitem.html',
+				'text!app/view/templates/menu-config.html',
                 'text!app/view/templates/menu-logging.html',
                 'text!app/view/templates/menu-realtime.html',
                 'text!app/view/templates/menu-search.html',
@@ -431,7 +431,8 @@
                 'text!app/view/templates/realtime.html',
                 'text!app/view/templates/search.html',
 				'text!app/view/templates/clickable.html',
-                'text!app/view/templates/rotatable.html'
+                'text!app/view/templates/rotatable.html',
+                'text!app/view/templates/menu-item.html'
           	]).then(function() {
 			    insertTpls( Array.prototype.splice.call(arguments, 5)) ;
 
@@ -455,12 +456,15 @@
 						    'js!app/model/RouteModel.js',
 						    'js!app/controller/ApplicationController.js',
 						    'js!app/controller/IndexController.js',
+                            'js!app/controller/MenuController.js',
+                            'js!app/controller/ConfigurationController.js',
 						    //'js!app/controller/ClickableController.js',
 						    'js!app/view/ApplicationView.js',
 						    'js!app/view/IndexView.js',
-                            'js!app/view/ConfigMenuItemView.js',
+                            'js!app/view/MenuConfigItemView.js',
 						    'js!app/view/ConfigurationView.js',
 						    'js!app/view/ClickableView.js',
+                            'js!app/view/RotatableView.js',
 						    'js!app.js'
 					    ]).then(function(a){
 						    window.Sp = Ember.Application.create(window.Sp) ;

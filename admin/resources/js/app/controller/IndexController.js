@@ -1,5 +1,27 @@
-Sp.IndexController = Em.Controller.extend({
+Sp.IndexController = Ember.ArrayController.extend({
+    content: [
+        {   name: "configuration",
+            cls: "",
+            isRotated: false
+        },
+        {
+            name: "log",
+            cls: "",
+            isRotated: false
+        },
+        {
+            name: "realtime",
+            cls: "",
+            isRotated: false
+        },
+        {
+            name: "search",
+            cls: "",
+            isRotated: false
+        }
+    ],
     switchMenuItem: function(item) {
-        this.controllerFor("application").switchMenuItem(item) ;
+        console.log("INDEX CONTROLLER " + item) ;
+        //this.controllerFor("application").switchMenuItem(item) ;
     }
 });

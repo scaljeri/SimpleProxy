@@ -1,6 +1,6 @@
-<script type="text/x-handlebars" data-template-name="clickable">
-	<div class="clickable">
-		{{outlet}}
+<script type="text/x-handlebars" data-template-name="_clickable">
+	<div {{action "clicked" on="click"}} class="clickable">
+		{{partial menu-item contentBinding="menuItem"}}
 	</div>
 </script>
 

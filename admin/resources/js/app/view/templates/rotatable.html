@@ -1,11 +1,11 @@
-<script type="text/x-handlebars" data-template-name="rotatable">
-    <div class="flip-container">
+<script type="text/x-handlebars" data-template-name="_rotatable">
+    <div {{bindAttr class="menuItem.isRotated:rotate :flip-container"}}>
         <div class="flipper">
             <div class="front">
-                {{outlet front}}
+                {{partial clickable}}
             </div>
             <div class="back">
-                {{outlet back}}
+                {{view Sp.ConfigurationView}}
             </div>
         </div>
     </div>

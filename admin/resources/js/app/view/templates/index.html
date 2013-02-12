@@ -1,20 +1,10 @@
 <script type="text/x-handlebars" data-template-name="index">
 	<div id="index">
-        <div id="configuration" class="menu-item positionable iconizable" data-state="config">
-            {{outlet config}}
-        </div>
-
-        <div id="log" class="menu-item positionable iconizable" data-state="log">
-            {{outlet logging}}
-        </div>
-
-        <div id="realtime" class="menu-item positionable iconizable" data-state="realtime">
-            {{outlet realtime}}
-        </div>
-
-        <div id="search" class="menu-item positionable iconizable" data-state="search">
-            {{outlet search}}
-        </div>
+        {{#each menuItem in controller}}
+            <div {{bindAttr id="menuItem.id"}} class="menu-item positionable iconizable bg">
+                {{partial rotatable}}
+            </div>
+        {{/each}}
 	</div>
 </script>
 

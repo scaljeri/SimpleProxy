@@ -1,5 +1,5 @@
-Sp.ConfigMenuItemView = Em.View.extend({
-    templateName: 'configMenuItem',
+Sp.MenuConfigItemView = Em.View.extend({
+    templateName: 'menu-config',
 
     position: null,
     background: "bg",

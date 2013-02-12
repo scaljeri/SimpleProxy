@@ -1,7 +1,19 @@
 Sp.ApplicationController = Em.Controller.extend({
+    needs: ["menu"], //, "menuLogItem", "menuRealtimeItem", "menuSearchItem"],
+
     positions: ['top', 'middle', 'bottom'],
     isLoading: true,
     activeMenuItem: null,
+
+    configItemSelectedBinding:  "controllers.menu.config.isSelected",
+    logItemSelectedBinding:     "controllers.menu.log.isSelected",
+
+    configItemSelectedChanged: function(a,b,c) {
+        //Ember.run.sync(); // fix all bindings (not needed so far)
+
+        console.log("CHECK VALUEL : " + this.get("controllers.menu.config.isSelected")) ;
+        console.log("CHECK VALUEL : " + this.get("controllers.menu.config.isSelected")) ;
+    }.observes('controllers.menu.config.isSelected'),//, 'controllers.menu.log.isSelected"'),
 
 /*    didActiveMenuItemChanged: function(controller, property) {
         if ( this._activeMenuItem != this.activeMenuItem ) {
@@ -11,7 +23,9 @@ Sp.ApplicationController = Em.Controller.extend({
     }.observes('activeMenuItem'),*/
 
     switchMenuItem: function(menuItem) {
-        console.log("DO SWITCH " + this.activeMenuItem) ;
+        console.log("DO SWITCH " + this.activeMenuItem + " and " + menuItem) ;
+
+        debugger ;
 
         if ( menuItem && this.activeMenuItem ) { // switch menu items
             var $menuItem   = $('#' + menuItem) ;
