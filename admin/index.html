@@ -445,7 +445,8 @@
 
 				    curl(cfg, [
 					    'js!app/model/BaseModel.js',
-                         'js!app/router.js'
+                         'js!app/router.js',
+                        'js!app/utils/handlebarHelpers'
 				    ]).then(function(bm) {
 					    curl(cfg, [
 						    'js!app/store/Store.js',
@@ -463,6 +464,7 @@
 						    'js!app/view/IndexView.js',
                             'js!app/view/MenuConfigItemView.js',
 						    'js!app/view/ConfigurationView.js',
+                            'js!app/view/LogView.js',
 						    'js!app/view/ClickableView.js',
                             'js!app/view/RotatableView.js',
 						    'js!app.js'

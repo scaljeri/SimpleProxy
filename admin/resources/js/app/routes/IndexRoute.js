@@ -5,28 +5,28 @@ Sp.IndexRoute = Ember.Route.extend({
 
     setupController: function(controller) {
         controller.set('content', [
-            {   config: "ConfigurationView",
+            {   back: "ConfigurationView",
                 id: "configuration",
                 cls: "",
                 isRotated: false,
                 img: "resources/img/config-icon.png",
                 txt: "Configuration"
             },
-            {   config: "LogView",
+            {   back: "LogView",
                 id: "log",
                 cls: "",
                 isRotated: false,
                 img: "resources/img/log-icon.png",
                 txt: "Log Overview"
             },
-            {   config: "RealtimeView",
+            {   back: "RealtimeView",
                 id: "realtime",
                 cls: "",
                 isRotated: false,
                 img: "resources/img/realtime-icon.png",
                 txt: "Realtime"
             },
-            {   config: "SearchView",
+            {   back: "SearchView",
                 id: "search",
                 cls: "",
                 isRotated: false,
