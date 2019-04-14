@@ -1,5 +1,5 @@
 {
-	"description": "These configuration settings are used if none is defined",
+	"description": "These configuration settings are used only if none are given",
 	"remote-host": "localhost",
 	"remote-port": "8080",
 	"proxy-only": "false",
